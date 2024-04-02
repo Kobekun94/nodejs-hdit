@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const configViewEngine = require('./config/viewEngine');
 const webRoutes = require('./routers/web');
+const apiRoutes = require('./routers/api');
+
 const connection = require('./config/database');
 
 const app = express();
@@ -15,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 configViewEngine(app);
 
 app.use('/', webRoutes);
+app.use('/v1/api/', apiRoutes);
 
 //test connection
 (async () => {

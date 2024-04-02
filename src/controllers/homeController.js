@@ -14,7 +14,8 @@ const getCreate = (req, res) => {
 
 const getUpdatePage = async (req, res) => {
   const userID = req.params.id;
-  const user = await getUserById(userID);
+  // const user = await getUserById(userID);
+  let user = await User.findById(userID).exec();
 
   return res.render('update.ejs', { userEdit: user });
 };
@@ -39,27 +40,20 @@ const postUpdateUser = async (req, res) => {
   let city = req.body.city;
   let userId = req.body.userId;
 
-  let [results, fields] = await connection.query(
-    `UPDATE Users set  
-  email = ?, 
-  name = ?, 
-  city = ?
-  where id = ?`,
-    [email, name, city, userId],
-  );
+  await User.updateOne({ _id: userId }, { name: name, email: email, city: city });
 
   res.redirect('/');
 };
 
 const postDeleteUser = async (req, res) => {
   const userID = req.params.id;
-  const user = await getUserById(userID);
+  let user = await User.findById(userID).exec();
   return res.render('delete.ejs', { userDelete: user });
 };
 
 const postRemoveUser = async (req, res) => {
   let userId = req.body.userId;
-  const user = await deleteUserById(userId);
+  const user = await User.deleteOne({ _id: userId });
   res.redirect('/');
 };
 
