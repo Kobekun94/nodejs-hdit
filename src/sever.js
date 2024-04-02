@@ -16,10 +16,14 @@ configViewEngine(app);
 
 app.use('/', webRoutes);
 
-// connection.query('SELECT * FROM customer.Users', function (err, results, fields) {
-//   console.log(results);
-// });
-
-app.listen(port, hostname, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+//test connection
+(async () => {
+  try {
+    connection();
+    app.listen(port, hostname, () => {
+      console.log(`nodejs app listening on port ${port}`);
+    });
+  } catch (error) {
+    console.log('Error connect to db', error);
+  }
+})();
