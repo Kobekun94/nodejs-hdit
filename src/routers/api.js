@@ -8,7 +8,7 @@ const {
   postUploadMutipleFiles,
 } = require('../controllers/apiController.js');
 
-const { postCreateCustomer } = require('../controllers/customerController.js');
+const { postCreateCustomer, postCreateArrayCustomer } = require('../controllers/customerController.js');
 
 const routerAPI = express.Router();
 
@@ -21,5 +21,6 @@ routerAPI.post('/file', postUploadSingleFileAPI);
 routerAPI.post('/files', postUploadMutipleFiles);
 
 routerAPI.post('/customers', postCreateCustomer);
+routerAPI.post('/customers-many', postCreateArrayCustomer);
 
 module.exports = routerAPI;

@@ -3,14 +3,15 @@ const timestamp = Date.now();
 
 const uploadSingleFile = async (fileObject) => {
   let extName = path.extname(fileObject.name);
-  let fileName = `${fileObject.name}-${timestamp}${extName}`;
+  let fileNamewtExt = path.basename(fileObject.name, path.extname(fileObject.name));
+  let fileName = `${fileNamewtExt}-${timestamp}${extName}`;
   uploadPath = path.join(__dirname, '..', '/public/image/upload/', fileName);
 
   try {
     await fileObject.mv(uploadPath);
     return {
       status: 'success',
-      path: uploadPath,
+      path: fileName,
       error: null,
     };
   } catch (error) {
