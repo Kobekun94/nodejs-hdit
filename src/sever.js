@@ -3,12 +3,16 @@ const express = require('express');
 const configViewEngine = require('./config/viewEngine');
 const webRoutes = require('./routers/web');
 const apiRoutes = require('./routers/api');
+const fileUpload = require('express-fileupload');
 
 const connection = require('./config/database');
 
 const app = express();
 const port = process.env.PORT || 8888;
 const hostname = process.env.HOST_NAME;
+
+//config file upload
+app.use(fileUpload());
 
 //config req.body
 app.use(express.json());
