@@ -1,5 +1,7 @@
 const User = require('../models/user');
+const Customer = require('../models/customer');
 const { uploadSingleFile, uploadMutipleFiles } = require('../services/fileService');
+const { getAllCustomerService } = require('../services/customerService');
 
 const getUsersAPI = async (req, res) => {
   let results = await User.find({});
@@ -76,6 +78,42 @@ const postUploadMutipleFiles = async (req, res) => {
   }
 };
 
+const getAllCustomer = async (req, res) => {
+  console.log(req.query);
+  let limit = req.query.limit;
+  let page = req.query.page;
+  let results = null;
+  if (limit && page) {
+    results = await getAllCustomerService(limit, page);
+  } else {
+    results = await getAllCustomerService();
+    return res.status(200).json({
+      errorCode: 0,
+      data: results,
+    });
+  }
+};
+
+const putUpdateCustomerAPI = async (req, res) => {
+  let name = req.body.name;
+  let address = req.body.address;
+  let phone = req.body.phone;
+  let email = req.body.email;
+  let image = req.body.image;
+  let description = req.body.description;
+  let userId = req.body.userId;
+
+  let customer = await Customer.updateOne(
+    { _id: userId },
+    { name: name, address: address, phone: phone, email: email, image: image, description: description },
+  );
+
+  return res.status(200).json({
+    errorCode: 0,
+    data: customer,
+  });
+};
+
 module.exports = {
   getUsersAPI,
   postCreateUserAPI,
@@ -83,4 +121,6 @@ module.exports = {
   postDeleteUserAPI,
   postUploadSingleFileAPI,
   postUploadMutipleFiles,
+  getAllCustomer,
+  putUpdateCustomerAPI,
 };

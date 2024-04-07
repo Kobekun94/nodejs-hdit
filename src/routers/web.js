@@ -8,6 +8,9 @@ const {
   postDeleteUser,
   postRemoveUser,
 } = require('../controllers/homeController');
+
+const { getCustomers } = require('../controllers/customerController');
+
 const router = express.Router();
 
 router.get('/', getHomepage);
@@ -17,5 +20,8 @@ router.post('/create-user', postCreateUser);
 router.post('/update-user', postUpdateUser);
 router.post('/delete-user/:id', postDeleteUser);
 router.post('/delete-user/', postRemoveUser);
+//customers
+router.get('/customers', getCustomers);
+router.get('/create', getCreate);
 
 module.exports = router;

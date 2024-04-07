@@ -1,7 +1,18 @@
 const { uploadSingleFile } = require('../services/fileService');
-const { createCustomerService, createArrayCustomerService } = require('../services/customerService');
+const {
+  createCustomerService,
+  createArrayCustomerService,
+  deleteACustomerService,
+  deleteArrCustomerService,
+} = require('../services/customerService');
+const Customer = require('../models/customer');
 
 module.exports = {
+  getCustomers: async (req, res) => {
+    let results = await Customer.find({});
+    return res.render('customers.ejs', { listCustomer: results });
+  },
+
   postCreateCustomer: async (req, res) => {
     let { name, address, phone, email, description } = req.body;
 
@@ -43,5 +54,24 @@ module.exports = {
         data: customers,
       });
     }
+  },
+
+  deleteACustomerAPI: async (req, res) => {
+    let id = req.body.id;
+    let result = await deleteACustomerService(id);
+    return res.status(200).json({
+      EC: 0,
+      data: result,
+    });
+  },
+
+  deleteArrCustomerAPI: async (req, res) => {
+    let ids = req.body.customersId;
+    console.log(ids);
+    let result = await deleteArrCustomerService(ids);
+    return res.status(200).json({
+      EC: 0,
+      data: result,
+    });
   },
 };

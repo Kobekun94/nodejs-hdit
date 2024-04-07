@@ -7,9 +7,9 @@
   </head>
 
   <div class="topnav">
-    <a class="active" href="/">Home</a>
+    <a href="/">Home</a>
     <a href="/create">Create Users</a>
-    <a href="/customers">Customers</a>
+    <a class="active" href="/customers">Customers</a>
   </div>
 
   <style>
@@ -31,32 +31,37 @@
   </style>
 
   <body>
-    <h2>List Table</h2>
+    <h2>List Customers</h2>
 
     <p>Move the mouse over the table rows to see the effect.</p>
 
     <table>
       <tr>
-        <th>ID</th>
-        <th>Email</th>
+        <th>Id</th>
         <th>Name</th>
-        <th>City</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Description</th>
+        <th>Image</th>
         <th>Action</th>
       </tr>
 
-      <% for (let i = 0; i < listUser.length; i++) { %>
+      <% for (let i = 0; i < listCustomer.length; i++) { %>
 
       <tr>
-        <td><%= listUser[i].id %></td>
-        <td><%= listUser[i].email %></td>
-        <td><%= listUser[i].name %></td>
-        <td><%= listUser[i].city %></td>
-        <td class="user-btn">
-          <form action="/update/<%= listUser[i].id %> " method="GET">
+        <td><%= listCustomer[i].id %></td>
+        <td><%= listCustomer[i].name %></td>
+        <td><%= listCustomer[i].address %></td>
+        <td><%= listCustomer[i].phone %></td>
+        <td><%= listCustomer[i].email %></td>
+        <td><%= listCustomer[i].description %></td>
+        <td><%= listCustomer[i].image %></td>
+        <td class="customer-btn">
+          <form action="/update/<%= listCustomer[i].id %>" method="GET">
             <button>Edit</button>
           </form>
-
-          <form action="/delete-user/<%= listUser[i].id %>" method="POST">
+          <form action="/delete-user/<%= listCustomer[i].id %>" method="POST">
             <button>Delete</button>
           </form>
         </td>
