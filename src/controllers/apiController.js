@@ -2,6 +2,7 @@ const User = require('../models/user');
 const Customer = require('../models/customer');
 const { uploadSingleFile, uploadMutipleFiles } = require('../services/fileService');
 const { getAllCustomerService } = require('../services/customerService');
+const { PromiseProvider } = require('mongoose');
 
 const getUsersAPI = async (req, res) => {
   let results = await User.find({});

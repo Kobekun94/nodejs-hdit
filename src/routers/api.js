@@ -17,6 +17,15 @@ const {
   deleteArrCustomerAPI,
 } = require('../controllers/customerController.js');
 
+const {
+  postCreateProject,
+  getAllProject,
+  postDeleteProject,
+  putUpdateProject,
+} = require('../controllers/projectController');
+
+const { postCreateTask, getAllTask, postDeleteTask, putUpdateTask } = require('../controllers/taskController');
+
 const routerAPI = express.Router();
 
 //user
@@ -40,5 +49,17 @@ routerAPI.delete('/customers-many', deleteArrCustomerAPI);
 //query
 routerAPI.get('/info', deleteArrCustomerAPI);
 routerAPI.get('/info/:name/:address', deleteArrCustomerAPI);
+
+//project
+routerAPI.post('/projects', postCreateProject);
+routerAPI.get('/projects', getAllProject);
+routerAPI.delete('/projects', postDeleteProject);
+routerAPI.put('/projects', putUpdateProject);
+
+//task
+routerAPI.post('/tasks', postCreateTask);
+routerAPI.get('/tasks', getAllTask);
+routerAPI.delete('/tasks', postDeleteTask);
+routerAPI.put('/tasks', putUpdateTask);
 
 module.exports = routerAPI;
